@@ -13,7 +13,6 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
-import sharp from 'sharp';
 import nodemailer from 'nodemailer';
 import db, { UPLOAD_DIR, DATA_DIR, getSettings, setSettings, parseRow, slugify } from './db.js';
 import { seed } from './seed.js';
@@ -299,6 +298,7 @@ admin.post(
         out.push(`/uploads/${svgName}`);
         continue;
       }
+      const { default: sharp } = await import('sharp'); // chargé à la demande : un souci de binaire natif ne bloque plus le démarrage
       await sharp(f.buffer)
         .rotate()
         .resize({ width: 2800, height: 2800, fit: 'inside', withoutEnlargement: true })

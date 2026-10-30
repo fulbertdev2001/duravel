@@ -6,7 +6,6 @@
   "main": "app.js",
   "description": "Site vitrine + portfolio Duravel Building (React/Vite + Express + SQLite + admin)",
   "scripts": {
-    "postinstall": "npm install --prefix server",
     "install:all": "npm install --prefix server && npm install --prefix client",
     "dev": "concurrently -n api,web -c red,gray \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "build": "node build.js",
@@ -27,5 +26,8 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   }
 }
