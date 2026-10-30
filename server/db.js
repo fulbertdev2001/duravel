@@ -7,22 +7,37 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Dossier inscriptible : celui demandé, sinon un dossier hors de la version déployée
-// (Hostinger remplace le dossier du site à chaque déploiement), sinon le dossier temporaire.
-function writableDir(wanted, name) {
-  const candidates = [wanted, path.join(os.homedir(), 'duravel-data', name), path.join(os.tmpdir(), 'duravel-data', name)].filter(Boolean);
-  for (const dir of candidates) {
-    try {
-      fs.mkdirSync(dir, { recursive: true });
-      fs.accessSync(dir, fs.constants.W_OK);
-      if (dir !== wanted) console.warn(`[stockage] ${wanted} non inscriptible, utilisation de ${dir}`);
-      return dir;
-    } catch {}
+// Stockage durable. Hostinger remplace le dossier du site à chaque déploiement : tout ce qui est écrit
+// dedans (base, uploads, vidéos) disparaît. Par défaut on utilise donc ~/duravel-data (hors du site),
+// avec repli sur le dossier du projet puis sur le dossier temporaire. DATA_DIR / UPLOAD_DIR priment.
+function writable(dir) {
+  try {
+    fs.mkdirSync(dir, { recursive: true });
+    fs.accessSync(dir, fs.constants.W_OK);
+    return true;
+  } catch {
+    return false;
   }
-  throw new Error(`Aucun dossier inscriptible pour ${name}`);
 }
-export const DATA_DIR = writableDir(process.env.DATA_DIR || path.join(__dirname, 'data'), 'data');
-export const UPLOAD_DIR = writableDir(process.env.UPLOAD_DIR || path.join(__dirname, 'uploads'), 'uploads');
+function pickDir(envValue, name) {
+  const local = path.join(__dirname, name);
+  const candidates = envValue
+    ? [envValue, path.join(os.homedir(), 'duravel-data', name), local]
+    : [path.join(os.homedir(), 'duravel-data', name), local, path.join(os.tmpdir(), 'duravel-data', name)];
+  const dir = candidates.find(writable);
+  if (!dir) throw new Error(`Aucun dossier inscriptible pour ${name}`);
+  // première fois sur ce dossier : on y rapatrie ce qui existait dans le dossier du projet
+  if (dir !== local && fs.existsSync(local)) {
+    for (const f of fs.readdirSync(local)) {
+      if (f.startsWith('.') || fs.existsSync(path.join(dir, f))) continue;
+      try { fs.cpSync(path.join(local, f), path.join(dir, f), { recursive: true }); } catch {}
+    }
+  }
+  console.log(`[stockage] ${name} → ${dir}`);
+  return dir;
+}
+export const DATA_DIR = pickDir(process.env.DATA_DIR, 'data');
+export const UPLOAD_DIR = pickDir(process.env.UPLOAD_DIR, 'uploads');
 
 const dbPath = path.join(DATA_DIR, 'duravel.sqlite');
 let db;
