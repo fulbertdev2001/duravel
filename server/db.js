@@ -38,23 +38,6 @@ try {
     const rawDb = new DatabaseSync(dbPath);
     console.log('[db] Moteur SQLite: node:sqlite natif Node 22 (indépendant de GLIBC)');
 
-    function normalizeParams(args) {
-      if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && !Array.isArray(args[0])) {
-        const obj = args[0];
-        const out = {};
-        for (const [k, v] of Object.entries(obj)) {
-          out[k] = v;
-          if (!k.startsWith('@') && !k.startsWith(':') && !k.startsWith('$')) {
-            out[`@${k}`] = v;
-            out[`:${k}`] = v;
-            out[`$${k}`] = v;
-          }
-        }
-        return [out];
-      }
-      return args;
-    }
-
     db = {
       pragma(str) {
         try { rawDb.exec(`PRAGMA ${str}`); } catch {}
@@ -64,18 +47,35 @@ try {
       },
       prepare(sql) {
         const stmt = rawDb.prepare(sql);
+        const paramNames = sql.match(/[@:$][a-zA-Z0-9_]+/g) || [];
+
+        function normalize(args) {
+          if (paramNames.length > 0 && args.length === 1 && typeof args[0] === 'object' && args[0] !== null && !Array.isArray(args[0])) {
+            const data = args[0];
+            const out = {};
+            for (const p of paramNames) {
+              const clean = p.slice(1);
+              if (data[p] !== undefined) out[p] = data[p];
+              else if (data[clean] !== undefined) out[p] = data[clean];
+              else out[p] = null;
+            }
+            return [out];
+          }
+          return args;
+        }
+
         return {
           all(...args) {
-            return stmt.all(...normalizeParams(args));
+            return stmt.all(...normalize(args));
           },
           get(...args) {
-            return stmt.get(...normalizeParams(args));
+            return stmt.get(...normalize(args));
           },
           run(...args) {
-            const res = stmt.run(...normalizeParams(args));
+            const res = stmt.run(...normalize(args));
             return {
-              changes: res.changes,
-              lastInsertRowid: typeof res.lastInsertRowid === 'bigint' ? Number(res.lastInsertRowid) : res.lastInsertRowid,
+              changes: res?.changes ?? 0,
+              lastInsertRowid: typeof res?.lastInsertRowid === 'bigint' ? Number(res.lastInsertRowid) : (res?.lastInsertRowid ?? 0),
             };
           },
         };
