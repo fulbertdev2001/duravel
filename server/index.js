@@ -353,4 +353,4 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: err.message || 'Erreur serveur' });
 });
 
-app.listen(PORT, () => console.log(`Duravel Building → http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Duravel Building → http://0.0.0.0:${PORT}`));
