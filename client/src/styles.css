@@ -1615,8 +1615,21 @@ a.cta__contact:hover { background: var(--ink); transform: translateX(8px); }
   .svc__inner { grid-template-columns: 1fr; gap: 24px; }
   .svc__mobile-img { display: block; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover; width: 100%; }
   .wall__grid { height: 110vh; width: 130%; margin-left: -15%; }
-  .founder__media { padding-right: 10%; margin-bottom: 40px; }
-  .founder__label { left: 10px; }
+  .founder__media { padding-right: 10%; margin-bottom: 30px; }
+  .founder__label {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    margin-top: -24px;
+    margin-left: 12px;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    padding: 12px 18px;
+    z-index: 3;
+  }
+  .founder__label strong { font-size: 16px; }
+  .founder__label span { font-size: 11px; }
   .method { height: auto !important; }
   .method__sticky { position: relative; height: auto; padding: 100px 0; }
   .method__steps { grid-template-columns: 1fr; gap: 30px; }
