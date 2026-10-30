@@ -9,8 +9,21 @@ try {
   console.error('[boot] démarrage impossible', e);
   app = http.createServer((_req, res) => {
     res.writeHead(500, { 'content-type': 'text/plain; charset=utf-8' });
-    res.end(`Démarrage impossible (Node ${process.version})\n${e?.message || e}\n`);
+    res.end(`Démarrage impossible (Node ${process.version})\n${e?.stack || e?.message || e}\n`);
   });
-  app.listen(process.env.PORT || 3000, '0.0.0.0');
+  const rawPort = process.env.PORT || 3000;
+  const port = isNaN(Number(rawPort)) ? rawPort : Number(rawPort);
+  function tryListen(p, host) {
+    try {
+      const s = host ? app.listen(p, host) : app.listen(p);
+      s.on('error', () => {});
+    } catch {}
+  }
+  if (typeof port === 'number') {
+    tryListen(port, '0.0.0.0');
+    for (const alt of [3000, 4000, 8080]) if (alt !== port) tryListen(alt, '0.0.0.0');
+  } else {
+    tryListen(port);
+  }
 }
 export default app;

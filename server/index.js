@@ -357,6 +357,25 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: err.message || 'Erreur serveur' });
 });
 
-app.listen(PORT, '0.0.0.0', () => console.log(`Duravel Building → http://0.0.0.0:${PORT}`));
+const rawPort = process.env.PORT || 3000;
+const port = isNaN(Number(rawPort)) ? rawPort : Number(rawPort);
+
+function tryListen(p, host) {
+  try {
+    const s = host ? app.listen(p, host, () => console.log(`Duravel Building → ${host}:${p}`)) : app.listen(p, () => console.log(`Duravel Building → ${p}`));
+    s.on('error', (err) => console.warn(`[listen] ${p} ignoré (${err.code || err.message})`));
+  } catch (err) {
+    console.warn(`[listen] erreur sur ${p}: ${err.message}`);
+  }
+}
+
+if (typeof port === 'number') {
+  tryListen(port, '0.0.0.0');
+  for (const alt of [3000, 4000, 8080]) {
+    if (alt !== port) tryListen(alt, '0.0.0.0');
+  }
+} else {
+  tryListen(port);
+}
 
 export default app;
