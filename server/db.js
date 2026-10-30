@@ -1,13 +1,26 @@
 import Database from 'better-sqlite3';
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
-export const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(__dirname, 'uploads');
-fs.mkdirSync(DATA_DIR, { recursive: true });
-fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+// Dossier inscriptible : celui demandé, sinon un dossier hors de la version déployée
+// (Hostinger remplace le dossier du site à chaque déploiement), sinon le dossier temporaire.
+function writableDir(wanted, name) {
+  const candidates = [wanted, path.join(os.homedir(), 'duravel-data', name), path.join(os.tmpdir(), 'duravel-data', name)].filter(Boolean);
+  for (const dir of candidates) {
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      fs.accessSync(dir, fs.constants.W_OK);
+      if (dir !== wanted) console.warn(`[stockage] ${wanted} non inscriptible, utilisation de ${dir}`);
+      return dir;
+    } catch {}
+  }
+  throw new Error(`Aucun dossier inscriptible pour ${name}`);
+}
+export const DATA_DIR = writableDir(process.env.DATA_DIR || path.join(__dirname, 'data'), 'data');
+export const UPLOAD_DIR = writableDir(process.env.UPLOAD_DIR || path.join(__dirname, 'uploads'), 'uploads');
 
 const db = new Database(path.join(DATA_DIR, 'duravel.sqlite'));
 try {
