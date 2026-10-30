@@ -1,0 +1,21 @@
+# Dépendances
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Données persistantes et uploads (ne pas écraser en prod)
+server/data/
+server/uploads/
+
+# Fichiers d'environnement & secrets
+.env
+server/.env
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Système
+.DS_Store
+Thumbs.db
