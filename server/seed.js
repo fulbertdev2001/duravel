@@ -45,11 +45,16 @@ export const DEFAULT_SETTINGS = {
   },
   founder: {
     name: '',
-    role: 'Fondateur & dirigeant',
+    role: 'Fondateur & artisan',
     quote: 'Un chantier réussi, c’est celui où chaque détail a été pensé avant d’être posé.',
     text: 'À la tête de Duravel Building, il suit personnellement chaque projet, de la première visite technique jusqu’à la réception des travaux. Un interlocuteur unique, exigeant sur la qualité d’exécution comme sur le rendu final.',
     image: u('fondateur-costume.webp'),
     image2: u('fondateur-portrait.webp'),
+    handmade: "Chaque réalisation présentée ici a été exécutée par le fondateur lui-même, de la préparation des supports au dernier joint.",
+    years: "20+",
+    yearsLabel: "ans d’expérience aux États-Unis",
+    journey: "Après plus de vingt ans passés aux États-Unis à perfectionner son métier, il a choisi de rentrer au Sénégal pour y apporter ce niveau d’exigence : des finitions nettes, des raccords invisibles et des chantiers menés comme là-bas, avec rigueur et sens du détail.",
+    steps: ["Plus de 20 ans de métier aux États-Unis", "Le choix de revenir au Sénégal", "Chaque chantier réalisé de ses propres mains"],
   },
   stats: [
     { value: 3, suffix: '', label: 'Domaines d’expertise' },

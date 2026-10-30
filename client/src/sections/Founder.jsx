@@ -52,6 +52,26 @@ export default function Founder({ s }) {
               </FadeUp>
             ))}
           </ul>
+          {(f.journey || f.years) && (
+            <FadeUp className="journey" delay={0.15}>
+              {f.years && (
+                <div className="journey__num">
+                  <strong>{f.years}</strong>
+                  <span>{f.yearsLabel}</span>
+                </div>
+              )}
+              <div className="journey__body">
+                {f.journey && <p>{f.journey}</p>}
+                {(f.steps || []).length > 0 && (
+                  <ol className="journey__steps">
+                    {f.steps.map((st, i) => (
+                      <li key={i}>{st}</li>
+                    ))}
+                  </ol>
+                )}
+              </div>
+            </FadeUp>
+          )}
           {f.quote && (
             <FadeUp as="blockquote" className="quote" delay={0.2}>
               <span className="quote__mark">“</span>

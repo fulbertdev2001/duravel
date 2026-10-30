@@ -5,7 +5,7 @@ import Media from '../components/Media';
 import { FadeUp, SplitReveal, useScrollProgress } from '../components/motion';
 
 /* Mur d'images à colonnes en parallaxe inversée + visionneuse plein écran */
-export default function GalleryWall({ projects = [] }) {
+export default function GalleryWall({ projects = [], founder = {} }) {
   const ref = useRef(null);
   const [idx, setIdx] = useState(null);
   const items = useMemo(() => {
@@ -44,6 +44,15 @@ export default function GalleryWall({ projects = [] }) {
         <FadeUp as="p" className="lead lead--muted">
           Cliquez sur une image pour l’ouvrir en plein écran.
         </FadeUp>
+        {founder.handmade && (
+          <FadeUp className="wall__signed" delay={0.1}>
+            <span className="wall__signed-num">{founder.years}</span>
+            <p>
+              <b>Fait de ses mains.</b> {founder.handmade}
+              {founder.yearsLabel && <em> {founder.years} {founder.yearsLabel}, puis le retour au Sénégal.</em>}
+            </p>
+          </FadeUp>
+        )}
       </div>
       <motion.div className="wall__grid">
         {cols.map((col, c) => (

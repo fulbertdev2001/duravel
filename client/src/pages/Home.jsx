@@ -20,7 +20,7 @@ export default function Home({ intro }) {
       <Services services={data.services} />
       <ProjectsRail projects={data.projects} />
       <BeforeAfterShowcase projects={data.projects} />
-      <GalleryWall projects={data.projects} />
+      <GalleryWall projects={data.projects} founder={s.founder} />
       <Founder s={s} />
       <Method s={s} />
       <CTA s={s} id="devis" />
