@@ -10,7 +10,11 @@ fs.mkdirSync(DATA_DIR, { recursive: true });
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const db = new Database(path.join(DATA_DIR, 'duravel.sqlite'));
-db.pragma('journal_mode = WAL');
+try {
+  db.pragma('journal_mode = WAL');
+} catch {
+  try { db.pragma('journal_mode = DELETE'); } catch {}
+}
 db.pragma('foreign_keys = ON');
 
 db.exec(`
