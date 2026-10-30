@@ -1,10 +1,12 @@
-import Database from 'better-sqlite3';
 import path from 'node:path';
 import fs from 'node:fs';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 
+const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Dossier inscriptible : celui demandé, sinon un dossier hors de la version déployée
 // (Hostinger remplace le dossier du site à chaque déploiement), sinon le dossier temporaire.
 function writableDir(wanted, name) {
@@ -22,7 +24,82 @@ function writableDir(wanted, name) {
 export const DATA_DIR = writableDir(process.env.DATA_DIR || path.join(__dirname, 'data'), 'data');
 export const UPLOAD_DIR = writableDir(process.env.UPLOAD_DIR || path.join(__dirname, 'uploads'), 'uploads');
 
-const db = new Database(path.join(DATA_DIR, 'duravel.sqlite'));
+const dbPath = path.join(DATA_DIR, 'duravel.sqlite');
+let db;
+
+try {
+  const Database = require('better-sqlite3');
+  db = new Database(dbPath);
+  console.log('[db] Moteur SQLite: better-sqlite3');
+} catch (err) {
+  console.warn(`[db] better-sqlite3 indisponible (${err.message}), bascule sur node:sqlite natif (Node 22)...`);
+  try {
+    const { DatabaseSync } = require('node:sqlite');
+    const rawDb = new DatabaseSync(dbPath);
+    console.log('[db] Moteur SQLite: node:sqlite natif Node 22 (indépendant de GLIBC)');
+
+    function normalizeParams(args) {
+      if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && !Array.isArray(args[0])) {
+        const obj = args[0];
+        const out = {};
+        for (const [k, v] of Object.entries(obj)) {
+          out[k] = v;
+          if (!k.startsWith('@') && !k.startsWith(':') && !k.startsWith('$')) {
+            out[`@${k}`] = v;
+            out[`:${k}`] = v;
+            out[`$${k}`] = v;
+          }
+        }
+        return [out];
+      }
+      return args;
+    }
+
+    db = {
+      pragma(str) {
+        try { rawDb.exec(`PRAGMA ${str}`); } catch {}
+      },
+      exec(sql) {
+        return rawDb.exec(sql);
+      },
+      prepare(sql) {
+        const stmt = rawDb.prepare(sql);
+        return {
+          all(...args) {
+            return stmt.all(...normalizeParams(args));
+          },
+          get(...args) {
+            return stmt.get(...normalizeParams(args));
+          },
+          run(...args) {
+            const res = stmt.run(...normalizeParams(args));
+            return {
+              changes: res.changes,
+              lastInsertRowid: typeof res.lastInsertRowid === 'bigint' ? Number(res.lastInsertRowid) : res.lastInsertRowid,
+            };
+          },
+        };
+      },
+      transaction(fn) {
+        return (...args) => {
+          rawDb.exec('BEGIN IMMEDIATE');
+          try {
+            const res = fn(...args);
+            rawDb.exec('COMMIT');
+            return res;
+          } catch (e) {
+            rawDb.exec('ROLLBACK');
+            throw e;
+          }
+        };
+      },
+    };
+  } catch (err2) {
+    console.error('[db] Erreur critique : aucun moteur SQLite n\'a pu être chargé.', err2);
+    throw err;
+  }
+}
+
 try {
   db.pragma('journal_mode = WAL');
 } catch {
