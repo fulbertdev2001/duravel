@@ -19,7 +19,11 @@ import db, { UPLOAD_DIR, DATA_DIR, getSettings, setSettings, parseRow, slugify }
 import { seed } from './seed.js';
 const PORT = process.env.PORT || 4000;
 const PROD = process.env.NODE_ENV === 'production';
-const CLIENT_DIST = path.join(__dirname, '..', 'client', 'dist');
+const CLIENT_DIST = [
+  path.join(process.cwd(), 'dist'),
+  path.join(__dirname, '..', 'client', 'dist'),
+  path.join(__dirname, 'dist'),
+].find((p) => fs.existsSync(p)) || path.join(__dirname, '..', 'client', 'dist');
 
 // Secret JWT : .env sinon généré et persisté
 let JWT_SECRET = process.env.JWT_SECRET;
@@ -354,3 +358,5 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Duravel Building → http://0.0.0.0:${PORT}`));
+
+export default app;
