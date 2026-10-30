@@ -53,7 +53,7 @@ export default function Nav() {
         animate={{ y: hidden ? '-110%' : 0 }}
         transition={{ duration: 0.5, ease }}
       >
-        <Link to="/" className="nav__brand" aria-label="Duravel Building — accueil">
+        <Link to="/" className="nav__brand" aria-label="Sebas Rénovation — accueil">
           <Logo compact light />
         </Link>
         <nav className="nav__links" aria-label="Navigation principale">

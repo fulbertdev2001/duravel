@@ -22,7 +22,7 @@ export default function Dashboard() {
       <header className="adm-head">
         <div>
           <h1>Tableau de bord</h1>
-          <p>Gérez le portfolio, les textes et les demandes de devis de Duravel Building.</p>
+          <p>Gérez le portfolio, les textes et les demandes de devis de Sebas Rénovation.</p>
         </div>
         <Link to="/admin/realisations/new" className="adm-btn">
           + Nouvelle réalisation

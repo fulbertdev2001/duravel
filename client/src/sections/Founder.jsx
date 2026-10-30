@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FadeUp, SplitReveal, ParallaxImage, useScrollProgress } from '../components/motion';
 import Icon from '../components/Icon';
 
-/* La touche Duravel + le fondateur */
+/* La touche Sebas + le fondateur */
 export default function Founder({ s }) {
   const t = s.touch || {};
   const f = s.founder || {};
@@ -16,7 +16,7 @@ export default function Founder({ s }) {
     <section className="section section--light founder" ref={ref}>
       <div className="wrap founder__grid">
         <div className="founder__media">
-          <ParallaxImage src={f.image} alt={f.name || 'Fondateur de Duravel Building'} className="founder__img" strength={8} />
+          <ParallaxImage src={f.image} alt={f.name || 'Fondateur de Sebas Rénovation'} className="founder__img" strength={8} />
           {f.image2 && (
             <motion.div className="founder__img2" style={{ y: y2, rotate: r2 }}>
               <img src={f.image2} alt="" loading="lazy" />

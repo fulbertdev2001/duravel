@@ -1,4 +1,4 @@
-/* ============ Admin Duravel ============ */
+/* ============ Admin Sebas ============ */
 .adm,
 .adm-login,
 .adm-loading {
@@ -7,7 +7,7 @@
   --a-line: #e6e2db;
   --a-text: #1b1b1d;
   --a-muted: #77756f;
-  --logo-ink: #0e0e0f;
+  --logo-ink: #111a2e;
   font-family: var(--f-body);
   color: var(--a-text);
   background: var(--a-bg);
@@ -30,7 +30,7 @@
 }
 .adm-side__brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 26px; border-bottom: 1px solid var(--line-d); margin-bottom: 16px; }
 .adm-side__brand span { display: grid; font-family: var(--f-display); font-weight: 700; font-size: 18px; line-height: 1; }
-.adm-side__brand small { font-size: 10px; letter-spacing: 0.3em; color: #e2404f; text-transform: uppercase; margin-top: 4px; }
+.adm-side__brand small { font-size: 10px; letter-spacing: 0.3em; color: #f58a3c; text-transform: uppercase; margin-top: 4px; }
 .adm-side nav { display: grid; gap: 2px; }
 .adm-side__link {
   display: flex;
@@ -170,7 +170,7 @@
 .adm-imgfield__prev:hover { border-color: var(--crimson); }
 .adm-imgfield__prev img { width: 100%; height: 100%; object-fit: cover; }
 .adm-drop { position: relative; border-radius: 14px; transition: background 0.2s, outline 0.2s; }
-.adm-drop.is-over { outline: 3px dashed var(--crimson); outline-offset: 4px; background: rgba(179, 32, 47, 0.06); }
+.adm-drop.is-over { outline: 3px dashed var(--crimson); outline-offset: 4px; background: rgba(234, 108, 14, 0.06); }
 
 .adm-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
 .adm-gallery__item { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--a-line); background: #fff; cursor: grab; transition: opacity 0.2s; }
@@ -181,7 +181,7 @@
 .adm-gallery__add { min-height: 170px; border: 2px dashed var(--a-line); border-radius: 12px; color: var(--a-muted); font-weight: 700; cursor: pointer; background: #fbfaf8; }
 .adm-gallery__add:hover { border-color: var(--crimson); color: var(--crimson); }
 
-.adm-modal { position: fixed; inset: 0; background: rgba(14, 14, 15, 0.6); backdrop-filter: blur(4px); z-index: 100; display: grid; place-items: center; padding: 20px; }
+.adm-modal { position: fixed; inset: 0; background: rgba(17, 26, 46, 0.6); backdrop-filter: blur(4px); z-index: 100; display: grid; place-items: center; padding: 20px; }
 .adm-modal__box { background: #fff; color: var(--a-text); border-radius: 18px; width: min(1000px, 100%); max-height: 90vh; display: flex; flex-direction: column; padding: 22px; gap: 16px; overflow: auto; }
 .adm-modal__box--md { width: min(720px, 100%); }
 .adm-modal__head,

@@ -38,7 +38,7 @@ export default function Preloader({ ready, onDone }) {
           <LogoMark size={190} draw />
         </div>
         <div className="preloader__word">
-          {'DURAVEL'.split('').map((l, i) => (
+          {'SEBAS'.split('').map((l, i) => (
             <motion.span
               key={i}
               initial={{ y: '110%' }}
@@ -50,7 +50,7 @@ export default function Preloader({ ready, onDone }) {
           ))}
         </div>
         <motion.div className="preloader__sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}>
-          Building — Rénovation & finitions
+          Construction & rénovation intérieure
         </motion.div>
       </motion.div>
       <div className="preloader__bar">

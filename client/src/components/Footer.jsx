@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer__giant" aria-hidden="true">
-          <span>DURAVEL</span>
+          <span>SEBAS</span>
         </div>
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} {s.brand?.name}. Tous droits réservés.</span>

@@ -45,7 +45,7 @@ const GROUPS = [
   },
   {
     id: 'touch',
-    title: 'La touche Duravel',
+    title: 'La touche Sebas',
     fields: [
       ['touch.eyebrow', 'Sur-titre'],
       ['touch.title', 'Titre', 'textarea'],
@@ -57,7 +57,7 @@ const GROUPS = [
     id: 'founder',
     title: 'Le fondateur',
     fields: [
-      ['founder.name', 'Nom', 'text', 'Laisser vide pour afficher « Duravel Building »'],
+      ['founder.name', 'Nom', 'text', 'Laisser vide pour afficher « Sebas Rénovation »'],
       ['founder.role', 'Fonction'],
       ['founder.quote', 'Citation', 'textarea'],
       ['founder.text', 'Présentation', 'textarea'],

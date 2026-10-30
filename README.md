@@ -1,6 +1,6 @@
-# Duravel Building — site vitrine + portfolio
+# Sebas Rénovation — site vitrine + portfolio
 
-Site « tout-en-un » pour **Duravel Building** (rénovation & finitions d’exception) :
+Site « tout-en-un » pour **Sebas Rénovation** (rénovation & finitions d’exception) :
 vitrine animée, portfolio immersif, comparateur avant/après, formulaire de devis et back-office complet.
 
 **Stack** : React 18 + Vite + Framer Motion + Lenis (front) · Express 5 + SQLite (better-sqlite3) + Sharp (API & admin).
@@ -48,7 +48,7 @@ Admin : `/admin` — identifiants du `.env` (par défaut `admin@duravelbuilding.
 - Derrière Nginx/Apache : proxy vers le port Node ; Node ≥ 18 (testé en 22).
 
 ## Points à valider avec le client
-- **E-mail de contact** : la présentation fournie indiquait `contact@seba-renovation.fr` (marque SEBA) — repris par défaut, à remplacer par l’adresse Duravel.
+- **E-mail de contact** : la présentation fournie indiquait `contact@seba-renovation.fr` (marque Sebas) — repris par défaut, à confirmer.
 - Nom du fondateur, adresse/zone d’intervention, réseaux sociaux, lieu/année des chantiers : champs prévus, laissés vides faute d’info.
 - Correspondance avant/après déduite des photos (agencement fenêtre/WC et faïence) — à confirmer.
 - Les chiffres clés sont factuels (3 expertises, 4 étapes…) : à remplacer par de vrais chiffres (années, chantiers) si disponibles.

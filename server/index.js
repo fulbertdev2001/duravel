@@ -362,7 +362,7 @@ const port = isNaN(Number(rawPort)) ? rawPort : Number(rawPort);
 
 function tryListen(p, host) {
   try {
-    const s = host ? app.listen(p, host, () => console.log(`Duravel Building → ${host}:${p}`)) : app.listen(p, () => console.log(`Duravel Building → ${p}`));
+    const s = host ? app.listen(p, host, () => console.log(`Sebas Rénovation → ${host}:${p}`)) : app.listen(p, () => console.log(`Sebas Rénovation → ${p}`));
     s.on('error', (err) => console.warn(`[listen] ${p} ignoré (${err.code || err.message})`));
   } catch (err) {
     console.warn(`[listen] erreur sur ${p}: ${err.message}`);

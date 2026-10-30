@@ -16,7 +16,7 @@ import './admin.css';
 export default function AdminApp() {
   const [me, setMe] = useState(undefined);
   useEffect(() => {
-    document.title = 'Admin — Duravel Building';
+    document.title = 'Admin — Sebas Rénovation';
     api
       .get('/api/auth/me')
       .then(setMe)
@@ -51,7 +51,7 @@ function Login({ onLogin }) {
           <LogoMark size={120} />
         </div>
         <h1>Espace administration</h1>
-        <p>Duravel Building — gestion du site & du portfolio</p>
+        <p>Sebas Rénovation — gestion du site & du portfolio</p>
         <input className="adm-input" type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} autoFocus required />
         <input className="adm-input" type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} required />
         {err && <div className="adm-error">{err}</div>}
@@ -92,7 +92,7 @@ function Shell({ me, onLogout }) {
         <Link to="/admin" className="adm-side__brand">
           <LogoMark size={64} />
           <span>
-            Duravel<small>Admin</small>
+            Sebas<small>Admin</small>
           </span>
         </Link>
         <nav onClick={() => setMenu(false)}>

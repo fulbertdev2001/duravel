@@ -35,7 +35,7 @@ export default function MessagesAdmin({ onChange }) {
     const csv = rows.map((r) => r.map((c) => `"${String(c ?? '').replace(/"/g, '""')}"`).join(';')).join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' }));
-    a.download = 'demandes-duravel.csv';
+    a.download = 'demandes-sebas.csv';
     a.click();
   };
 
@@ -68,7 +68,7 @@ export default function MessagesAdmin({ onChange }) {
                 <p className="adm-msg__text">{m.message}</p>
                 <div className="adm-row">
                   {m.email && (
-                    <a className="adm-btn adm-btn--sm" href={`mailto:${m.email}?subject=Votre projet — Duravel Building`}>
+                    <a className="adm-btn adm-btn--sm" href={`mailto:${m.email}?subject=Votre projet — Sebas Rénovation`}>
                       Répondre : {m.email}
                     </a>
                   )}

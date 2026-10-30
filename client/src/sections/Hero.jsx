@@ -73,7 +73,7 @@ export default function Hero({ s, intro }) {
             >
               <Media
                 src={src}
-                alt="Salle de bain rénovée par Duravel Building"
+                alt="Salle de bain rénovée par Sebas Rénovation"
                 lazy={false}
                 className={contain ? 'is-contain' : ''}
                 onMeta={(w, h) => setPortrait(h > w * 1.05)}

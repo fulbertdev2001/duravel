@@ -14,9 +14,9 @@ const u = (f) => `/uploads/${f}`;
 
 export const DEFAULT_SETTINGS = {
   brand: {
-    name: 'Duravel Building',
+    name: 'Sebas Rénovation',
     tagline: 'Excellence technique, le style en plus.',
-    baseline: 'Rénovation & finitions d’exception',
+    baseline: 'Construction & rénovation intérieure',
   },
   hero: {
     eyebrow: 'Excellence technique, le style en plus.',
@@ -29,7 +29,7 @@ export const DEFAULT_SETTINGS = {
   vision: {
     eyebrow: '01 / Notre vision',
     title: 'Sublimer vos espaces par une maîtrise technique irréprochable.',
-    text: 'Chaque projet de rénovation nécessite un soin extrême apporté aux détails. Duravel Building allie rigueur de chantier, respect des délais et sens de l’esthétique pour transformer vos intérieurs avec élégance.',
+    text: 'Chaque projet de rénovation nécessite un soin extrême apporté aux détails. Sebas Rénovation allie rigueur de chantier, respect des délais et sens de l’esthétique pour transformer vos intérieurs avec élégance.',
     image: u('calacatta-douche-verre.webp'),
     pillars: [
       { title: 'Rigueur d’exécution', text: 'Préparation méticuleuse des supports et des finitions.' },
@@ -38,16 +38,16 @@ export const DEFAULT_SETTINGS = {
     ],
   },
   touch: {
-    eyebrow: '03 / La touche Duravel',
+    eyebrow: '03 / La touche Sebas',
     title: 'L’alliance parfaite entre savoir-faire artisan et esthétique contemporaine.',
-    text: 'Là où d’autres s’arrêtent à la simple pose, Duravel Building apporte un œil esthétique avisé, garantissant des raccords invisibles, des lignes épurées et une mise en valeur durable de votre patrimoine.',
+    text: 'Là où d’autres s’arrêtent à la simple pose, Sebas Rénovation apporte un œil esthétique avisé, garantissant des raccords invisibles, des lignes épurées et une mise en valeur durable de votre patrimoine.',
     checks: ['Conseil en choix de matériaux', 'Finitions haute précision', 'Suivi personnalisé du chantier'],
   },
   founder: {
     name: '',
     role: 'Fondateur & artisan',
     quote: 'Un chantier réussi, c’est celui où chaque détail a été pensé avant d’être posé.',
-    text: 'À la tête de Duravel Building, il suit personnellement chaque projet, de la première visite technique jusqu’à la réception des travaux. Un interlocuteur unique, exigeant sur la qualité d’exécution comme sur le rendu final.',
+    text: 'À la tête de Sebas Rénovation, il suit personnellement chaque projet, de la première visite technique jusqu’à la réception des travaux. Un interlocuteur unique, exigeant sur la qualité d’exécution comme sur le rendu final.',
     image: u('fondateur-costume.webp'),
     image2: u('fondateur-portrait.webp'),
     handmade: "Chaque réalisation présentée ici a été exécutée par le fondateur lui-même, de la préparation des supports au dernier joint.",
@@ -87,9 +87,9 @@ export const DEFAULT_SETTINGS = {
   },
   social: { instagram: '', facebook: '', linkedin: '', tiktok: '' },
   seo: {
-    title: 'Duravel Building — Rénovation & finitions d’exception',
+    title: 'Sebas Rénovation — Construction & rénovation intérieure',
     description:
-      'Duravel Building : rénovation d’intérieurs, salles de bain, carrelage grand format, peinture et finitions haute exigence. Découvrez nos réalisations et demandez votre devis.',
+      'Sebas Rénovation : rénovation d’intérieurs, salles de bain, carrelage grand format, peinture et finitions haute exigence. Découvrez nos réalisations et demandez votre devis.',
   },
   projectTypes: ['Salle de bain', 'Rénovation intérieure', 'Peinture & revêtement', 'Sols & carrelage', 'Autre'],
 };
