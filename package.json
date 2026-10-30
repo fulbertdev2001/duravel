@@ -9,7 +9,7 @@
     "postinstall": "npm install --prefix server",
     "install:all": "npm install --prefix server && npm install --prefix client",
     "dev": "concurrently -n api,web -c red,gray \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "build": "node -e \"import('node:fs').then(fs => fs.existsSync('client/dist/index.html') ? console.log('Client prebuilt.') : import('node:child_process').then(cp => cp.execSync('npm install --prefix client && npm run build --prefix client', {stdio:'inherit'})))\",
+    "build": "node build.js",
     "build:all": "npm run install:all && npm run build --prefix client",
     "start": "node app.js",
     "seed": "npm run seed --prefix server"
